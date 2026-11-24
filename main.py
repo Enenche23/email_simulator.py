@@ -14,8 +14,13 @@ class Email:
         print(f"\n{' Email ':-^29}")
         print(f"{'From:':<10}{self.sender.name}")
         print(f"{'To:':<10}{self.receiver.name}")
-        print(f"{'Subject:':<10}{self.subject}")  
-        print(f"{'Body:':<10}{self.body}")        
+        print(f"{'Subject:':<10}{self.subject}")
+        print(f"{'Body:':<10}{self.body}")
+        print(f"{'':-^29}\n")
+
+    def __str__(self):
+        status = 'Read' if self.read else 'Unread'
+        return f'[{status:<6}] From: {self.sender.name:<10} | Subject: {self.subject}'
 
 class User:
     def __init__(self, name):
@@ -29,6 +34,12 @@ class User:
 class Inbox:
     def __init__(self):
         self.emails = []
-    
+
     def receive_email(self, email):
         self.emails.append(email)
+
+    def list_emails(self):
+        if self.emails == []:
+            print('Your inbox is empty.\n')
+            return
+
